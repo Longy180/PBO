@@ -1,0 +1,41 @@
+Excercise 1
+    - Upload and generate output for 3 problem instances
+    - Produce 3 fixed-budget plots
+    - Store output in results/ex1
+
+Exercise 2
+    - Implement RLS
+    - Implement (1+1) EA
+    - Run the following on F1, F2, F3, F18, F23, F24, F25:
+        - Random Search
+        - RLS
+        - (1+1) EA
+    - Generate results and store in results/ex2
+    - Plot with mean and std deviation across 10 runs
+    - Write summary for each function
+    - Prove complexity for Random Search
+    - Prove complexity for RLS
+    - Prove complexity for (1+1) EA
+
+Exercise 3
+    - Implement Individual Class
+    - Implement Population Class
+    - Implement mutation operation
+    - Implement uniform crossover operation
+    - Design a genetic algorithm (GA) using above operations
+    - Generate and save plots for genetic algorithm (GA)
+    - Analyse results and compare against algorithms in exercise 2, store in results/ex3
+
+Exercise 4
+    - Implement MMAS
+    - Implement MMAS*
+    - Run the algorithm with set p values
+    - Produce plots
+    - Compare plots to exercise 2
+    - Analyse results and store in results/ex4
+
+Exercise 5
+    - Design ACO with >10 ants
+    - Compare ACO with MMAS and MMAS*
+    - produce plots
+    - Write analysis of how ACO performs and save in results/ex5
