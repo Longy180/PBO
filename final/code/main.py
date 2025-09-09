@@ -1,16 +1,16 @@
-from ioh import get_problem, ProblemClass, logger
+from ioh import get_problem, ProblemType, ProblemClass, logger
 import sys
 import numpy as np
 
-
-def ea11(problem, iterations, budget = None):
+# EA(1+1) Algorithm
+def ea11(problem: ProblemType, iterations: int, budget: int | None = None) -> tuple[int,list[int]]:
     if budget is None:
         budget = int(problem.meta_data.n_variables * problem.meta_data.n_variables * 50)
     
-    if problem.meta_data.problem_id == 18 and func.meta_data.n_variables == 32:
-        optimum = 8
+    if problem.meta_data.problem_id == 18 and problem.meta_data.n_variables == 32:
+        optimum: int = 8
     else:
-        optimum = problem.optimum.y
+        optimum: int = problem.optimum.y
     for _ in range(iterations):
         f_opt = sys.float_info.min
         x_opt: list[int] = np.random.randint(2, size = problem.meta_data.n_variables)
@@ -26,7 +26,9 @@ def ea11(problem, iterations, budget = None):
                 f_opt = f
                 x_opt = x
             if f_opt >= optimum:
+                print("done")
                 break
+            print(f)
         problem.reset()
     return f_opt, x_opt
                 
@@ -63,7 +65,7 @@ if __name__ == '__main__':
     func = ea11
 
     problems = []
-    num_dim = 200
+    num_dim = 100
     f = [1,2,3]
 
     for i in f:
@@ -78,5 +80,5 @@ if __name__ == '__main__':
 
     for problem in problems:
         problem.attach_logger(l)
-        budget = 10000
+        budget = 100000
         print(func(problem,1,budget)[0],problem.optimum.y,random_search(problem,1,budget)[0])
