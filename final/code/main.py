@@ -1,7 +1,7 @@
 from ioh import get_problem, ProblemType, ProblemClass, logger
 import sys
 import numpy as np
-from optimisationAlgorithms import ea11
+import optimisationAlgorithms
 from mmas import mmas, mmasStar
 
 def random_search(func, iterations, budget = None):
@@ -32,7 +32,7 @@ def random_search(func, iterations, budget = None):
 
 if __name__ == '__main__':
 
-    func = ea11
+    func = optimisationAlgorithms.RLS
 
     problems = []
     num_dim = 100
