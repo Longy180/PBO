@@ -3,8 +3,6 @@ import sys
 import numpy as np
 from optimisationAlgorithms import ea11
 from mmas import mmas, mmasStar
-                
-
 
 def random_search(func, iterations, budget = None):
     # budget of each run: 50n^2
