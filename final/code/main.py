@@ -1,6 +1,7 @@
 from ioh import get_problem, ProblemType, ProblemClass, logger
 import sys
 import numpy as np
+import optimisationAlgorithms
 
 # EA(1+1) Algorithm
 def ea11(problem: ProblemType, iterations: int, budget: int | None = None) -> tuple[int,list[int]]:
