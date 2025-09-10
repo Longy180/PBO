@@ -32,7 +32,7 @@ def random_search(func, iterations, budget = None):
 
 if __name__ == '__main__':
 
-    func = optimisationAlgorithms.RLS
+    func = optimisationAlgorithms.ea11
 
     problems = []
     num_dim = 100
@@ -51,4 +51,4 @@ if __name__ == '__main__':
     for problem in problems:
         problem.attach_logger(l)
         budget = 100000
-        print(func(problem, budget)[0], problem.optimum.y, mmasStar(problem, budget)[0]) #,random_search(problem,budget)[0])
+        print(f"Problem: {problem.meta_data.name} \nfound sol: {func(problem, budget)[0]} | sol optimum: {problem.optimum.y} | mmas sol: {mmasStar(problem, budget)[0]}\n") #,random_search(problem,budget)[0])
