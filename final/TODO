@@ -17,9 +17,11 @@ Exercise 2
     - Prove complexity for (1+1) EA - ?
 
 Exercise 3
-    - Implement mutation operation - Rory
-    - Implement uniform crossover operation - Rory
-    - Design a genetic algorithm (GA) using above operations - Rory
+    - Implement individual class - Rory ✅ 
+    - Implement populaiton class - Rory ✅ 
+    - Implement mutation operation - Rory ✅ 
+    - Implement uniform crossover operation - Rory ✅ 
+    - Design a genetic algorithm (GA) using above operations - Rory ✅ 
     - Generate and save plots for genetic algorithm (GA) - Rory 
     - Analyse results and compare against algorithms in exercise 2, store in results/ex3 - Rory 
 
