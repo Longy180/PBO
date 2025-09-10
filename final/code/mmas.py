@@ -44,7 +44,7 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[int,list[int]
         # If better than problem optimum then return.
         if f_opt >= optimum:
             print("done")
-            break;
+            break
     return f_opt, x_opt
 
 # MMAS*
@@ -87,5 +87,5 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[int,list[
         # If better than problem optimum then return
         if f_opt >= optimum:
             print("done")
-            break;
+            break
     return f_opt, x_opt
