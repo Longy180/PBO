@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import optimisationAlgorithms
 from mmas import mmas, mmasStar
+from ACO import ACO
 
 def random_search(func, iterations, budget = None):
     # budget of each run: 50n^2
@@ -36,11 +37,10 @@ if __name__ == '__main__':
 
     problems = []
     num_dim = 100
-    f = [1,2,3, 18, 23]
+    f = [1, 2, 3, 23, 24, 25]
 
     for i in f:
         problems.append(get_problem(fid = i, dimension = num_dim, instance = 1, problem_class = ProblemClass.PBO))
-
 
     l = logger.Analyzer(root = "data",
     folder_name = "run",
@@ -49,6 +49,7 @@ if __name__ == '__main__':
     print(func.__name__)
 
     for problem in problems:
+        aco = ACO(problem=problem)
         problem.attach_logger(l)
         budget = 100000
-        print(f"Problem: {problem.meta_data.name} \nfound sol: {func(problem, budget)[0]} | sol optimum: {problem.optimum.y} | mmas sol: {mmasStar(problem, budget)[0]}\n") #,random_search(problem,budget)[0])
+        print(f"Problem: {problem.meta_data.name} \nfound sol: {aco.run()} | sol optimum: {problem.optimum.y} | mmas sol: {mmasStar(problem, budget)[0]}\n") #,random_search(problem,budget)[0])
