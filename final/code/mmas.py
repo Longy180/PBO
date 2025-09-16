@@ -5,7 +5,7 @@ import random
 import math
 
 # MMAS
-def mmas(problem: ProblemType, budget: int | None = None) -> tuple[int,list[int]]:
+def mmas(problem: ProblemType, budget: int | None = None) -> tuple[float,list[int]]:
     # Setup budget = 50n^2
     if budget is None:
         budget = int(problem.meta_data.n_variables * problem.meta_data.n_variables * 50)
@@ -17,11 +17,11 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[int,list[int]
         optimum: int = problem.optimum.y
     
     # Setup x & f & path
-    f_opt = sys.float_info.min
-    x_opt = None
+    f_opt: float = sys.float_info.min
     length: int = problem.meta_data.n_variables
     path = [[0.5,0.5]]*length
     p = 1/length#1/math.sqrt(length) # p = [1,1/sqrt(n),1/n]
+    x_opt: list[int] = list(np.random.randint(length, size = problem.meta_data.n_variables))
     for _ in range(budget):
         # simulate ant movement through binary path
         my_path = []
@@ -44,11 +44,11 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[int,list[int]
         # If better than problem optimum then return.
         if f_opt >= optimum:
             print("done")
-            break
+            break;
     return f_opt, x_opt
 
 # MMAS*
-def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[int,list[int]]:
+def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[float,list[int]]:
     # Set budget to 50n^2    
     if budget is None:
         budget = int(problem.meta_data.n_variables * problem.meta_data.n_variables * 50)
@@ -60,9 +60,9 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[int,list[
         optimum: int = problem.optimum.y
     
     # Setup x & f & path
-    f_opt = sys.float_info.min
-    x_opt = None
+    f_opt: float = sys.float_info.min
     length: int = problem.meta_data.n_variables
+    x_opt: list[int] = list(np.random.randint(length, size = problem.meta_data.n_variables))
     path = [[0.5,0.5]]*length
     p = 1/math.sqrt(length) # p
     for _ in range(budget):
@@ -87,5 +87,5 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[int,list[
         # If better than problem optimum then return
         if f_opt >= optimum:
             print("done")
-            break
+            break;
     return f_opt, x_opt
