@@ -13,7 +13,7 @@ def ea11(problem: ProblemType, budget: int | None = None) -> tuple[int,list[int]
         optimum: int = 8
     else:
         optimum: int = problem.optimum.y
-    
+
     # Setup x & f
     f_opt = sys.float_info.min
     x_opt: list[int] = list(np.random.randint(2, size = problem.meta_data.n_variables))
