@@ -3,9 +3,11 @@ import numpy as np
 
 
 class Individual:
-    def __init__(self, n, chromosome=None):
+    chromosome: list[int]
+    fitness: float | None
+    def __init__(self, n: int, chromosome: list[int] | None = None):
         if chromosome is None:
-            self.chromosome = np.random.randint(0, 2, size=n)
+            self.chromosome = list(np.random.randint(2, size=n))
         else:
             self.chromosome = chromosome
         self.fitness = None
