@@ -16,8 +16,11 @@ class Ant:
       tau_0 = pheromones[i][0]
       tau_1 = pheromones[i][1]
 
-      prob_0 = tau_0 ** alpha
-      prob_1 = tau_1 ** alpha
+      eta_0 = 1.0
+      eta_1 = 1.0
+
+      prob_0 = (tau_0 ** alpha) * (eta_0 ** beta)
+      prob_1 = (tau_1 ** alpha) * (eta_1 ** beta)
 
       total = prob_0 + prob_1
       prob_1_normalised = prob_1 / total
@@ -34,7 +37,7 @@ class Ant:
 class ACO:
   def __init__(self, problem: ProblemType, population_size=10, generation_count=100000, alpha=1.0, beta=1.0):
     self.problem = problem
-    if self.problem.meta_data.problem_id == 18 and self.problem.meta_data.n_variables == 32:
+    if self.problem.meta_data.problem_id == 18:
         self.optimum: int = 8
     else:
         self.optimum: int = self.problem.optimum.y
@@ -63,7 +66,10 @@ class ACO:
 
     # Deposition
     best_ant = max(self.ants, key=lambda ant: ant.fitness)
-    deposit_amount = best_ant.fitness / self.optimum
+    if best_ant.fitness < 0:
+      deposit_amount = 0.1
+    else:
+      deposit_amount = best_ant.fitness / self.optimum
 
     for i, bit in enumerate(best_ant.solution):
       self.pheromones[i][bit] += deposit_amount
@@ -89,6 +95,7 @@ class ACO:
       if generation % 5000 == 0:
             print(f"{generation} {self.best_fitness}")
             print(self.pheromones)
+            print(self.problem.meta_data.name)
             print(self.optimum)
 
     print(f"found in generation: {generation}")
