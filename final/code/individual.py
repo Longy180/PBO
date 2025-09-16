@@ -4,13 +4,13 @@ import numpy as np
 
 class Individual:
     chromosome: list[int]
-    fitness: float | None
+    fitness: float
     def __init__(self, n: int, chromosome: list[int] | None = None):
         if chromosome is None:
             self.chromosome = list(np.random.randint(2, size=n))
         else:
             self.chromosome = chromosome
-        self.fitness = None
+        self.fitness = -1
 
     def evaluate(self, problem):
         self.fitness = problem(self.chromosome)
