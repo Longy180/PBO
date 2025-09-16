@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
     problems = []
     num_dim = 100
-    f = [1,2,3]
+    f = [1,2,3, 18, 23]
 
     for i in f:
         problems.append(get_problem(fid = i, dimension = num_dim, instance = 1, problem_class = ProblemClass.PBO))
