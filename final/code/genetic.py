@@ -39,6 +39,11 @@ class GeneticAlgorithm:
 
             if pop.getBest().fitness > best.fitness:
                 best = pop.getBest()
+                print(best.fitness)
+                for i in range(8):
+                    for j in range(8):
+                        print(best.chromosome[j + (i * i)], end='')
+                    print()
             
             if best.fitness >= optimum:
                 print(f"done in {_} iterations.")

@@ -17,8 +17,9 @@ class Ant:
             tau_0 = pheromones[i][0]
             tau_1 = pheromones[i][1]
 
+            # Heuristic
             eta_0 = 1.0
-            eta_1 = 1.5
+            eta_1 = 2.0
 
             prob_0 = (tau_0 ** alpha) * (eta_0 ** beta)
             prob_1 = (tau_1 ** alpha) * (eta_1 ** beta)
@@ -47,7 +48,13 @@ class ACO:
         self.population_size = population_size
         self.generation_count = generation_count
         self.ants = []
-        self.pheromones = np.ones((problem.meta_data.n_variables, 2))
+
+        self.pheromones = []
+        for i in range(problem.meta_data.n_variables):
+            self.pheromones.append([0.5, 0.5])
+        
+        print(f"initial pheromones: {self.pheromones}\n")
+
         self.alpha = alpha
         self.beta = beta
         self.evaporation_rate = 0.1
@@ -63,37 +70,38 @@ class ACO:
     def apply_pheromone_update(self):
         # Evaporation
         for i in range(len(self.pheromones)):
-            self.pheromones[i][0] = (1 - self.evaporation_rate) * self.pheromones[i][0]
-            self.pheromones[i][1] = (1 - self.evaporation_rate) * self.pheromones[i][1]
+            self.pheromones[i][0] *= (1 - self.evaporation_rate)
+            self.pheromones[i][1] *= (1 - self.evaporation_rate)
 
-        # Deposition through elitism
-        num_ants = int(0.1 * self.population_size)
-        best_ants = sorted(self.ants, key=lambda ant: ant.evaluate(), reverse=True)[0:num_ants]
+        # Get elite ants
+        num_elite = max(1, int(0.2 * self.population_size))
         
-        # for ant in best_ants:
-        #     print(ant.fitness)
-        
-        weighted = 1 / num_ants
-        for ant in best_ants:
-            deposit_amount = (ant.fitness / self.best_fitness) * weighted
+        best_ants = sorted(self.ants, key=lambda ant: ant.fitness, reverse=True)[:num_elite]  # Highest first
+
+        # Calculate deposits using rank-based method (MUCH more stable)
+        for rank, ant in enumerate(best_ants):
+            # Rank-based deposit (best gets most, worst gets least)
+            rank_weight = (num_elite - rank) / num_elite
+            deposit_amount = 0.3 * rank_weight  # Scale as needed
+            
+            print(f"Ant rank {rank}: fitness={ant.fitness:.1f}, deposit={deposit_amount:.3f}")
+            
+            # Apply deposits
             for i, bit in enumerate(ant.solution):
                 self.pheromones[i][bit] += deposit_amount
 
+        # Apply reasonable bounds
         self.pheromones = np.clip(self.pheromones, 0.01, 10.0)
     
     def local_search(self, ant: Ant):
-        improved = True
-        while improved:
-            improved = False
-            for i in range(len(ant.solution)):
-                local_ant = ant.solution.copy()
-                local_ant[i] = 1 - local_ant[i]
-                fitness = self.problem(local_ant)
-                
-                if fitness > ant.fitness:
-                    ant.solution = local_ant
-                    ant.fitness = fitness
-                    improved = True
+        random_index = random.randint(0, ant.length - 1)
+        local_ant = ant.solution.copy()
+        local_ant[random_index] = 1 - local_ant[random_index]
+        fitness = self.problem(local_ant)
+        
+        if fitness > ant.fitness:
+            ant.solution = local_ant
+            ant.fitness = fitness
 
     def run(self):
         for generation in range(self.generation_count):
@@ -103,16 +111,16 @@ class ACO:
             for ant in self.ants:
                 ant.construct_solution(self.pheromones, self.alpha, self.beta)
                 ant.evaluate()
-                if random.random() < 0.2:
-                    self.local_search(ant)
+                self.local_search(ant)
 
+                print(f"fitness: {ant.fitness}")
                 if ant.fitness > self.best_fitness:
                     self.best_fitness = ant.fitness
                     self.best_solution = ant.solution.copy()
 
             self.apply_pheromone_update()
 
-            if generation % 50 == 0:
+            if generation % 2000 == 0:
                 best_ant = max(self.ants, key=lambda ant: ant.fitness)
                 print(f"Gen {generation}: Best fitness = {best_ant.fitness}")
                 print(f"Best solution sample: {best_ant.solution[:20]}...")
@@ -120,12 +128,39 @@ class ACO:
                     for j in range(8):
                         print(best_ant.solution[j + (i * i)], end='')
                     print()
-                
-            # if generation % 200 == 0:
-            #     print(self.pheromones)
-                
-            if generation % 10000 == 0:
-                self.pheromones = np.ones((self.problem.meta_data.n_variables, 2))
+                print("pheromones")
+                print(self.pheromones)
+
+            if generation % 2000 == 0 and generation != 0:
+                exit()
 
         print(f"found in generation: {generation}")
         return self.best_fitness, self.best_solution
+    
+    # Quick test to verify OneMax behavior
+    def test_fitness(self, problem):
+        """Test that OneMax works as expected"""
+        
+        print(f"Fitness values for {problem.meta_data.name}\n")
+        # Test case 1: All zeros
+        all_zeros = [0] * problem.meta_data.n_variables
+        fitness_zeros = problem(all_zeros)
+        print(f"All zeros fitness: {fitness_zeros}")
+        
+        # Test case 2: All ones  
+        all_ones = [1] * problem.meta_data.n_variables
+        fitness_ones = problem(all_ones)
+        print(f"All ones fitness: {fitness_ones}")
+        
+        # Test case 3: Half ones
+        half_ones = [1 if i < problem.meta_data.n_variables//2 else 0 
+                    for i in range(problem.meta_data.n_variables)]
+        fitness_half = problem(half_ones)
+        print(f"Half ones fitness: {fitness_half}")
+        
+        # Test case 4: Manual count
+        manual_count = sum(half_ones)
+        print(f"Manual count of half_ones: {manual_count}")
+        
+        print(f"Problem optimum: {problem.optimum.y if hasattr(problem, 'optimum') else 'Unknown'}")
+        print(f"Problem variables: {problem.meta_data.n_variables}")
