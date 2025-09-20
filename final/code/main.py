@@ -37,7 +37,7 @@ if __name__ == '__main__':
     func = optimisationAlgorithms.ea11
 
     problems = []
-    num_dim = 50
+    num_dim = 100
     f = [1,2,3]
 
     for i in f:
