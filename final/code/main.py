@@ -4,7 +4,7 @@ import numpy as np
 import optimisationAlgorithms
 from mmas import mmas, mmasStar
 
-def random_search(func, iterations, budget = None):
+def random_search(func, iterations, budget = None) -> tuple[float, list[int]]:
     # budget of each run: 50n^2
     if budget is None:
         budget = int(func.meta_data.n_variables * func.meta_data.n_variables * 50)
@@ -15,12 +15,14 @@ def random_search(func, iterations, budget = None):
         optimum = func.optimum.y
     #print(optimum)
     # 10 independent runs for each algorithm on each problem.
+    f_opt: float = sys.float_info.min
+    x_opt: list[int] = list(np.random.randint(2, size = func.meta_data.n_variables))
     for r in range(iterations):
         f_opt = sys.float_info.min
-        x_opt = None
+        x_opt = list(np.random.randint(2, size = func.meta_data.n_variables))
         for i in range(budget):
-            x = np.random.randint(2, size = func.meta_data.n_variables)
-            f = func(x)
+            x: list[int] = list(np.random.randint(2, size = func.meta_data.n_variables))
+            f: float = func(x)
             if f > f_opt:
                 f_opt = f
                 x_opt = x
@@ -35,7 +37,7 @@ if __name__ == '__main__':
     func = optimisationAlgorithms.ea11
 
     problems = []
-    num_dim = 100
+    num_dim = 50
     f = [1,2,3]
 
     for i in f:
