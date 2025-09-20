@@ -4,7 +4,7 @@ Excercise 1
 
 Exercise 2 
     - Implement RLS - Riley
-    - Implement (1+1) EA - Bryce
+    - Implement (1+1) EA - Bryce ✅ 
     - Run the following on F1, F2, F3, F18, F23, F24, F25: - ?
         - Random Search
         - RLS
@@ -26,9 +26,9 @@ Exercise 3
     - Analyse results and compare against algorithms in exercise 2, store in results/ex3 - Rory 
 
 Exercise 4
-    - Implement MMAS - Bryce 
-    - Implement MMAS* - Bryce
-    - Run the algorithm with set p values - Bryce 
+    - Implement MMAS - Bryce ✅ 
+    - Implement MMAS* - Bryce✅ 
+    - Run the algorithm with set p values - Bryce ✅ 
     - Produce plots - Bryce 
     - Compare plots to exercise 2 - ?
     - Analyse results and store in results/ex4 - ?
