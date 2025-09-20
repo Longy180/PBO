@@ -1,5 +1,7 @@
 import random
 import numpy as np
+import math
+from ioh import ProblemType
 
 
 class Individual:
@@ -10,9 +12,9 @@ class Individual:
             self.chromosome = list(np.random.randint(2, size=n))
         else:
             self.chromosome = chromosome
-        self.fitness = -1
+        self.fitness = -math.inf
 
-    def evaluate(self, problem):
+    def evaluate(self, problem: ProblemType):
         self.fitness = problem(self.chromosome)
         return self.fitness
     
