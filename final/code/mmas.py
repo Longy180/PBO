@@ -39,7 +39,7 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[float,list[in
             x_opt = my_path
             for i in range(len(my_path)):
                 path[i][my_path[i]] = min((1-p)*path[i][my_path[i]]+p,1-1/length)#included
-                path[i][1-my_path[i]] = max((1-p)*path[i][my_path[i]],1/length)#not included
+                path[i][1-my_path[i]] = max((1-p)*path[i][1-my_path[i]],1/length)#not included
         
         # If better than problem optimum then return.
         if f_opt >= optimum:
@@ -82,7 +82,7 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[float,lis
             x_opt = my_path
             for i in range(len(my_path)):
                 path[i][my_path[i]] = min((1-p)*path[i][my_path[i]]+p,1-1/length)#included
-                path[i][1-my_path[i]] = max((1-p)*path[i][my_path[i]],1/length)#not included
+                path[i][1-my_path[i]] = max((1-p)*path[i][1-my_path[i]],1/length)#not included
         
         # If better than problem optimum then return
         if f_opt >= optimum:

@@ -6,6 +6,7 @@ import copy
 
 
 class Population:
+    individuals: list[Individual]
     # Initialise a list of individuals as a population
     def __init__(self, size, n, problem):
         self.individuals = [Individual(n) for _ in range(size)]
@@ -20,7 +21,7 @@ class Population:
         return max(self.individuals, key=lambda ind: ind.fitness)
         
     # Generalised function to centralise the execution of a crossover
-    def performCrossover(self, parent1, parent2, crossover_probability=0.8):
+    def performCrossover(self, parent1, parent2, crossover_probability=0.8) -> tuple[Individual, Individual]:
         # Should crossover occur, if not return parents without modification
         random_number: float = random.random()
         if random_number > crossover_probability:
@@ -56,11 +57,11 @@ class Population:
         return parent1, parent2
     
     
-    def uniform_Crossover(self, parent1: Individual, parent2):
-        length = len(parent1.chromosome)
-        mask = np.random.randint(0, 2, size=length)
-        child1 = copy.deepcopy(parent1)
-        child2 = copy.deepcopy(parent2)
+    def uniform_Crossover(self, parent1: Individual, parent2) -> tuple[Individual, Individual]:
+        length: int = len(parent1.chromosome)
+        mask: list[int] = list(np.random.randint(0, 2, size=length))
+        child1: Individual = copy.deepcopy(parent1)
+        child2: Individual = copy.deepcopy(parent2)
         for i in range(length):
             if mask[i] == 1:
                 child1.chromosome[i] = parent2.chromosome[i]
