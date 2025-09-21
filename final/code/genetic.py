@@ -1,24 +1,29 @@
 from population import Population
+from individual import Individual
 import numpy as np
+from ioh import ProblemType
 
 class GeneticAlgorithm:
+    pop_size: int
+    generations: int
     def __init__(self, pop_size=20, generations=1000):
         self.pop_size = pop_size
         self.generations = generations
 
-    def run(self, problem):
+    def run(self, problem: ProblemType) -> Individual | None:
         # setup Problem Optimum
         if problem.meta_data.problem_id == 23 and problem.meta_data.n_variables == 32:
             optimum: int = 8
         else:
             optimum: int = problem.optimum.y
 
-        n = problem.meta_data.n_variables
-        pop = Population(self.pop_size, n, problem)
-        best = pop.getBest()
+        n: int = problem.meta_data.n_variables
+        pop: Population = Population(self.pop_size, n, problem)
+        best: Individual | None = pop.getBest()
+        if best is None: return None
 
         for _ in range(self.generations):
-            new_inds = []
+            new_inds: list[Individual] = []
             for i in range(self.pop_size):
                 # tournament selection
                 parent1, parent2 = pop.informal_tournament_selection(k=3)
@@ -30,20 +35,19 @@ class GeneticAlgorithm:
                 new_inds.extend([child1, child2])
 
             # elitism: keep best of old + new
-            elite = pop.getBest()
+            elite: Individual | None = pop.getBest()
+            if elite is None: return None
             pop.individuals = sorted(new_inds,
                                      key=lambda ind: ind.fitness, reverse=True)[:self.pop_size]
-
-            if elite.fitness > pop.getBest().fitness:
+            popBest: Individual | None = pop.getBest()
+            if popBest is None: return None
+            if elite.fitness > popBest.fitness:
                 pop.individuals[-1] = elite
 
-            if pop.getBest().fitness > best.fitness:
+            if popBest.fitness > best.fitness:
                 best = pop.getBest()
-                print(best.fitness)
-                for i in range(8):
-                    for j in range(8):
-                        print(best.chromosome[j + (i * i)], end='')
-                    print()
+                if best is None: return None
+
             
             if best.fitness >= optimum:
                 print(f"done in {_} iterations.")
