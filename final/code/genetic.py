@@ -8,7 +8,7 @@ class GeneticAlgorithm:
 
     def run(self, problem):
         # setup Problem Optimum
-        if problem.meta_data.problem_id == 18 and problem.meta_data.n_variables == 32:
+        if problem.meta_data.problem_id == 23 and problem.meta_data.n_variables == 32:
             optimum: int = 8
         else:
             optimum: int = problem.optimum.y

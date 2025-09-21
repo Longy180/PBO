@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
     problems = []
     num_dim = 100
-    f = [1, 2, 3, 23, 24, 25]
+    f = [1, 2, 3, 18, 23, 24, 25]
 
     for i in f:
         problems.append(get_problem(fid = i, dimension = num_dim, instance = 1, problem_class = ProblemClass.PBO))
@@ -50,7 +50,8 @@ if __name__ == '__main__':
 
     for problem in problems:
         print(f"Problem {problem.meta_data.problem_id}: {problem.meta_data.name}\n")
-        aco = ACO(problem=problem)
         problem.attach_logger(l)
+        aco = ACO(problem=problem)
         budget = 100000
         print(f"found sol: {aco.run()} | sol optimum: {problem.optimum.y} | mmas sol: {mmasStar(problem, budget)[0]}\n") #,random_search(problem,budget)[0])
+        problem.reset()
