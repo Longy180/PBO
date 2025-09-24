@@ -4,17 +4,17 @@ Excercise 1
 
 Exercise 2 
     - Implement RLS - Riley
-    - Implement (1+1) EA - Bryce
-    - Run the following on F1, F2, F3, F18, F23, F24, F25: - ?
+    - Implement (1+1) EA - Bryce ✅ 
+    - Run the following on F1, F2, F3, F18, F23, F24, F25: - Asad
         - Random Search
         - RLS
         - (1+1) EA
-    - Generate results and store in results/ex2 - ?
-    - Plot with mean and std deviation across 10 runs - ?
-    - Write summary for each function - ?
-    - Prove complexity for Random Search - ?
-    - Prove complexity for RLS - ?
-    - Prove complexity for (1+1) EA - ?
+    - Generate results and store in results/ex2 - Asad
+    - Plot with mean and std deviation across 10 runs - Asad
+    - Write summary for each function - Asad
+    - Prove complexity for Random Search - Brian
+    - Prove complexity for RLS - Asad
+    - Prove complexity for (1+1) EA - Asad
 
 Exercise 3
     - Implement individual class - Rory ✅ 
@@ -26,14 +26,16 @@ Exercise 3
     - Analyse results and compare against algorithms in exercise 2, store in results/ex3 - Rory 
 
 Exercise 4
-    - Implement MMAS - Bryce 
-    - Implement MMAS* - Bryce
-    - Run the algorithm with set p values - Bryce 
+    - Implement MMAS - Bryce ✅ 
+    - Implement MMAS* - Bryce✅ 
+    - Run the algorithm with set p values - Bryce ✅ 
     - Produce plots - Bryce 
-    - Compare plots to exercise 2 - ?
-    - Analyse results and store in results/ex4 - ?
+    - Compare plots to exercise 2 - Brian
+    - Analyse results and store in results/ex4 - Brian
 
 Exercise 5
+    - Implement ACO class - Riley ✅ 
+    - Implement Ant class - Riley ✅ 
     - Design ACO with >10 ants - Riley
     - Compare ACO with MMAS and MMAS* - Riley
     - Produce plots - Riley

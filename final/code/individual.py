@@ -1,16 +1,20 @@
 import random
 import numpy as np
+import math
+from ioh import ProblemType
 
 
 class Individual:
-    def __init__(self, n, chromosome=None):
+    chromosome: list[int]
+    fitness: float
+    def __init__(self, n: int, chromosome: list[int] | None = None):
         if chromosome is None:
-            self.chromosome = np.random.randint(0, 2, size=n)
+            self.chromosome = list(np.random.randint(2, size=n))
         else:
             self.chromosome = chromosome
-        self.fitness = None
+        self.fitness = -math.inf
 
-    def evaluate(self, problem):
+    def evaluate(self, problem: ProblemType):
         self.fitness = problem(self.chromosome)
         return self.fitness
     
