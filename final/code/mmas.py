@@ -17,7 +17,7 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[float,list[in
         optimum: int = problem.optimum.y
     
     # Setup x & f & path
-    f_opt: float = sys.float_info.min
+    f_opt: float = float('-inf')
     length: int = problem.meta_data.n_variables
     path = [[0.5,0.5]]*length
     p_options = [1,1/length,1/math.sqrt(length)]
@@ -63,7 +63,7 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[float,lis
         optimum: int = problem.optimum.y
     
     # Setup x & f & path
-    f_opt: float = sys.float_info.min
+    f_opt: float = float("-inf")
     length: int = problem.meta_data.n_variables
     x_opt: list[int] = list(np.random.randint(length, size = problem.meta_data.n_variables))
     path = [[0.5,0.5]]*length

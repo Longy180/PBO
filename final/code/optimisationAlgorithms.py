@@ -16,7 +16,7 @@ def ea11(problem: ProblemType, budget: int | None = None) -> tuple[float,list[in
         optimum: int = problem.optimum.y
 
     # Setup x & f
-    f_opt: float = sys.float_info.min
+    f_opt: float = float("-inf")
     x_opt: list[int] = list(np.random.randint(2, size = problem.meta_data.n_variables))
     for _ in range(budget):
         x: list[int] = x_opt.copy()
@@ -50,7 +50,7 @@ def RLS(problem: ProblemType, budget: int = 100000, n: int = 100) -> tuple[float
         optimum: int = problem.optimum.y
     
     # Setup x & f
-    f_opt: float = sys.float_info.min
+    f_opt: float = float("-inf")
     x_opt: list[int] = []
     for i in range(n):
         x_opt.append(random.randint(0, 1))
