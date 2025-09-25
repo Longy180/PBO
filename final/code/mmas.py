@@ -20,7 +20,8 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[float,list[in
     f_opt: float = sys.float_info.min
     length: int = problem.meta_data.n_variables
     path = [[0.5,0.5]]*length
-    p = 1/length#1/math.sqrt(length) # p = [1,1/sqrt(n),1/n]
+    p_options = [1,1/length,1/math.sqrt(length)]
+    p = p_options[0] # p
     x_opt: list[int] = list(np.random.randint(length, size = problem.meta_data.n_variables))
     for _ in range(budget):
         # simulate ant movement through binary path
@@ -66,7 +67,8 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[float,lis
     length: int = problem.meta_data.n_variables
     x_opt: list[int] = list(np.random.randint(length, size = problem.meta_data.n_variables))
     path = [[0.5,0.5]]*length
-    p = 1/math.sqrt(length) # p
+    p_options = [1,1/length,1/math.sqrt(length)]
+    p = p_options[0] # p
     for _ in range(budget):
         # Simulate ant movement through binary path
         my_path = []
