@@ -20,7 +20,8 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[float,list[in
     f_opt: float = sys.float_info.min
     length: int = problem.meta_data.n_variables
     path = [[0.5,0.5]]*length
-    p = 1/length#1/math.sqrt(length) # p = [1,1/sqrt(n),1/n]
+    p_options = [1,1/length,1/math.sqrt(length)]
+    p = p_options[0] # p
     x_opt: list[int] = list(np.random.randint(length, size = problem.meta_data.n_variables))
     for _ in range(budget):
         # simulate ant movement through binary path
@@ -38,8 +39,10 @@ def mmas(problem: ProblemType, budget: int | None = None) -> tuple[float,list[in
             f_opt = f
             x_opt = my_path
             for i in range(len(my_path)):
-                path[i][my_path[i]] = min((1-p)*path[i][my_path[i]]+p,1-1/length)#included
-                path[i][1-my_path[i]] = max((1-p)*path[i][1-my_path[i]],1/length)#not included
+                bit_path = [0,0]
+                bit_path[my_path[i]] = min((1-p)*path[i][my_path[i]]+p,1-1/length)#included
+                bit_path[1-my_path[i]] = max((1-p)*path[i][1-my_path[i]],1/length)#not included
+                path[i] = bit_path
         
         # If better than problem optimum then return.
         if f_opt >= optimum:
@@ -64,7 +67,8 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[float,lis
     length: int = problem.meta_data.n_variables
     x_opt: list[int] = list(np.random.randint(length, size = problem.meta_data.n_variables))
     path = [[0.5,0.5]]*length
-    p = 1/math.sqrt(length) # p
+    p_options = [1,1/length,1/math.sqrt(length)]
+    p = p_options[0] # p
     for _ in range(budget):
         # Simulate ant movement through binary path
         my_path = []
@@ -81,8 +85,10 @@ def mmasStar(problem: ProblemType, budget: int | None = None) -> tuple[float,lis
             f_opt = f
             x_opt = my_path
             for i in range(len(my_path)):
-                path[i][my_path[i]] = min((1-p)*path[i][my_path[i]]+p,1-1/length)#included
-                path[i][1-my_path[i]] = max((1-p)*path[i][1-my_path[i]],1/length)#not included
+                bit_path = [0,0]
+                bit_path[my_path[i]] = min((1-p)*path[i][my_path[i]]+p,1-1/length)#included
+                bit_path[1-my_path[i]] = max((1-p)*path[i][1-my_path[i]],1/length)#not included
+                path[i] = bit_path
         
         # If better than problem optimum then return
         if f_opt >= optimum:
