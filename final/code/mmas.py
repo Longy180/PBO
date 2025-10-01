@@ -97,7 +97,7 @@
 #     return f_opt, x_opt
 
 
-##### MMAS Script #####
+##### MMAS Script ##### to have p value inputed
 
 from ioh import ProblemType
 import numpy as np
