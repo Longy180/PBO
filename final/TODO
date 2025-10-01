@@ -1,6 +1,6 @@
 Excercise 1
-    - Upload and produce 3 fixed-budget plots - Brian
-    - Store output in results/ex1 - Brian
+    - Upload and produce 3 fixed-budget plots - Brian ✅ 
+    - Store output in results/ex1 - Brian ✅ 
 
 Exercise 2 
     - Implement RLS - Riley
@@ -12,7 +12,7 @@ Exercise 2
     - Generate results and store in results/ex2 - Asad
     - Plot with mean and std deviation across 10 runs - Asad
     - Write summary for each function - Asad
-    - Prove complexity for Random Search - Brian
+    - Prove complexity for Random Search - Brian ✅
     - Prove complexity for RLS - Asad
     - Prove complexity for (1+1) EA - Asad
 
@@ -29,14 +29,15 @@ Exercise 4
     - Implement MMAS - Bryce ✅ 
     - Implement MMAS* - Bryce✅ 
     - Run the algorithm with set p values - Bryce ✅ 
-    - Produce plots - Bryce 
-    - Compare plots to exercise 2 - Brian
-    - Analyse results and store in results/ex4 - Brian
+    - Produce plots - Brian ✅
+    - Compare plots to exercise 2 - Brian ✅
+    - Analyse results and store in results/ex4 - Brian ✅
+        - Only waiting for comparison to exercise 2 
 
 Exercise 5
     - Implement ACO class - Riley ✅ 
     - Implement Ant class - Riley ✅ 
     - Design ACO with >10 ants - Riley
-    - Compare ACO with MMAS and MMAS* - Riley
-    - Produce plots - Riley
-    - Write analysis of how ACO performs and save in results/ex5 - Riley
+    - Compare ACO with MMAS and MMAS* - Brian✅ 
+    - Produce plots - Brian✅ 
+    - Write analysis of how ACO performs and save in results/ex5 - Brian✅ 
